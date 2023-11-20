@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Item/PotionUse.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/potion_start.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/drink.ogg" type="AudioStream" id=3]
+
+[node name="PotionUse" type="Node2D" groups=["active_use", "notify_player_animation"]]
+script = ExtResource( 1 )
+
+[node name="StartupTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="DrinkTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="SelfDestructTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="StartEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -1.0
+autoplay = true
+
+[node name="DrinkEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -5.0
+
+[connection signal="timeout" from="StartupTimer" to="." method="_startup_finished"]
+[connection signal="timeout" from="DrinkTimer" to="." method="_finish_drink"]
+[connection signal="timeout" from="SelfDestructTimer" to="." method="_self_destruct"]

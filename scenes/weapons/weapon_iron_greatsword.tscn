@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sound/windup.ogg" type="AudioStream" id=1]
+[ext_resource path="res://src/HitboxScript.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/weapons/weapon_iron_greatsword.png" type="Texture" id=3]
+[ext_resource path="res://src/weapons/weapon_iron_greatsword.gd" type="Script" id=4]
+[ext_resource path="res://assets/art/effects/mighty_effect.png" type="Texture" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 18.6667
+height = 21.3333
+
+[node name="weapon_iron_greatsword" type="Node2D" groups=["active_use"]]
+z_index = -1
+script = ExtResource( 4 )
+
+[node name="Sword" type="Sprite" parent="."]
+position = Vector2( 0, -40 )
+rotation = -0.785398
+texture = ExtResource( 3 )
+offset = Vector2( 24, -24 )
+
+[node name="Effect" type="Sprite" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.752941 )
+position = Vector2( 8, -32 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+flip_h = true
+
+[node name="Hitbox" type="Area2D" parent="Effect"]
+position = Vector2( -6, 0 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 2 )
+damage_min = 9
+damage_max = 12
+knockback_power = 400
+knockback_length = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Effect/Hitbox"]
+position = Vector2( 2.66667, -2.66667 )
+rotation = 1.5708
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WindupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+
+[connection signal="timeout" from="Timer" to="." method="_self_destruct"]

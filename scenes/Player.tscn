@@ -1,0 +1,297 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://assets/art/player/hobo_idle.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/player/hobo.png" type="Texture" id=2]
+[ext_resource path="res://src/Player.gd" type="Script" id=3]
+[ext_resource path="res://scenes/ui/InventoryUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/art/items/item_shadow.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui/PlayerHud.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/art/player/hobo_dead.png" type="Texture" id=7]
+[ext_resource path="res://assets/sound/coin.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/art/player/hobo_roll.png" type="Texture" id=9]
+[ext_resource path="res://scenes/ui/Console.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/art/player/hobo_hurt.png" type="Texture" id=11]
+[ext_resource path="res://assets/art/player/hobo_drink.png" type="Texture" id=12]
+[ext_resource path="res://assets/art/player/hobo_open.png" type="Texture" id=13]
+[ext_resource path="res://assets/art/player/hobo_hold.png" type="Texture" id=14]
+[ext_resource path="res://assets/art/player/hobo_swing_mighty.png" type="Texture" id=15]
+[ext_resource path="res://assets/art/player/hobo_defend.png" type="Texture" id=16]
+[ext_resource path="res://assets/art/player/sweat.png" type="Texture" id=17]
+[ext_resource path="res://scenes/player/FallingShadow.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/art/effects/playerlight.png" type="Texture" id=19]
+[ext_resource path="res://assets/sound/block.ogg" type="AudioStream" id=20]
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 13 )
+region = Rect2( 16, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 13 )
+region = Rect2( 32, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 16, 20 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 112, 0, 16, 20 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "defend",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 19 ) ],
+"loop": true,
+"name": "drink",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "hold",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "open",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "roll",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "swing_mighty",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "walking",
+"speed": 11.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 16, 9 )
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 16.0
+height = 0.0
+
+[sub_resource type="CircleShape2D" id=12]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 16, 20 )
+
+[sub_resource type="Animation" id=15]
+resource_name = "flash"
+length = 0.16
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.16 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "roll"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "quake"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -2, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=["player"]]
+z_index = 1
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="." groups=["player"]]
+position = Vector2( 0, -24 )
+scale = Vector2( 3, 3 )
+z_as_relative = false
+frames = SubResource( 9 )
+animation = "defend"
+
+[node name="Sweat" type="Sprite" parent="."]
+visible = false
+position = Vector2( -24, -40 )
+z_index = 1
+texture = ExtResource( 17 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 5 )
+
+[node name="PlayerHud" parent="." instance=ExtResource( 6 )]
+
+[node name="InventoryUI" parent="." instance=ExtResource( 4 )]
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+shape = SubResource( 17 )
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 0, -8 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+smoothing_speed = 8.5
+editor_draw_screen = false
+
+[node name="ItemPickup" type="Area2D" parent="."]
+position = Vector2( 0, -8 )
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickup"]
+shape = SubResource( 11 )
+
+[node name="InteractRange" type="Area2D" parent="."]
+position = Vector2( 0, -8 )
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
+shape = SubResource( 12 )
+disabled = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 0, -20 )
+shape = SubResource( 13 )
+disabled = true
+
+[node name="FallingShadow" parent="." instance=ExtResource( 18 )]
+visible = false
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 19 )
+color = Color( 0.611765, 0.611765, 0.611765, 1 )
+energy = 0.25
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+anims/flash = SubResource( 15 )
+anims/roll = SubResource( 16 )
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+playback_speed = 10.0
+anims/quake = SubResource( 23 )
+
+[node name="Console" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StaminaDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="UseCooldownTimer" type="Timer" parent="."]
+
+[node name="Coin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="Block" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+
+[connection signal="animation_finished" from="Sprite" to="." method="_anim_finished"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hit"]
+[connection signal="animation_over" from="FallingShadow" to="." method="_intro_animation_over"]
+[connection signal="animation_finished" from="Anims" to="." method="_on_anim_over"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="_knockback_over"]
+[connection signal="timeout" from="UseCooldownTimer" to="." method="_on_UseCooldownTimer_timeout"]

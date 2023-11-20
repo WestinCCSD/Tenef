@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/windup.ogg-a8d4e061b1c3020eb8b388534aa9de86.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/windup.ogg"
+dest_files=[ "res://.import/windup.ogg-a8d4e061b1c3020eb8b388534aa9de86.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
